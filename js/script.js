@@ -45,7 +45,7 @@
             'days': days,
             'hours': hours,
             'minutes': minutes,
-            'second': seconds
+            'seconds': seconds
         }
     }
     function setClock(selector, entime) {

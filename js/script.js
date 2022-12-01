@@ -78,7 +78,122 @@
             }
         }
     }
-    setClock('.timer', deadLine)
+    setClock('.timer', deadLine);
+
+    const buttModal = document.querySelectorAll('[data-modal]'),
+          modal = document.querySelector('.modal'),
+          closeModal = document.querySelector('[data-close]');
+
+          buttModal.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modal.classList.add('show');
+                modal.classList.remove('hide');
+                document.body.style.overflow = 'hidden'
+            })
+          });
+
+    closeModal.addEventListener('click', () => {
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    });
+
+    class MenuCard {
+        constructor(src, alt, tittle, description, price, perentSelector) {
+            this.src = src;
+            this.alt = alt;
+            this.tittle = tittle;
+            this.description = description;
+            this.price = price;
+            this.parent = document.querySelector(perentSelector);
+            this.transfer = 27;
+            this.changeToUAH()
+        }
+
+        changeToUAH() {
+            return this.price = this.price * this.transfer;
+        }
+
+        rander() {
+            const element = document.createElement('div');
+            element.innerHTML = `
+            <div class="menu__field">
+                <div class="container">
+                    <div class="menu__item">
+                        <img src= ${this.src} alt=${this.alt}>
+                        <h3 class="menu__item-subtitle">${this.tittle}</h3>
+                        <div class="menu__item-descr">${this.description}</div>
+                        <div class="menu__item-divider"></div>
+                        <div class="menu__item-price">
+                            <div class="menu__item-cost">Цена:</div>
+                            <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+                        </div>
+                </div>`;
+                this.parent.append(element);
+        }
+    }
+
+    new MenuCard(
+        "img/tabs/vegy.jpg",
+        "vegy",
+       ' Меню "Фитнес"',
+       'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+       9,
+       '.menu .container'
+    ).rander();
+
+    new MenuCard(
+        "img/tabs/elite.jpg",
+        "elite",
+       ' Меню “Премиум”',
+       'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
+       12,
+       '.menu .container'
+    ).rander();
+
+    new MenuCard(
+        "img/tabs/post.jpg",
+        "post",
+       'Меню "Постное"',
+       'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
+       13,
+       '.menu .container'
+    ).rander();
 });
 
+// 'use strict'
+// // function myTest(surname) {
+// //     console.log(this);
+// //     console.log(this.name + surname)
+// // };
+// // const user = {
+// //     name: 'Jhon'
+// // };
+// // myTest.call(user, 'smith')
+// // myTest.apply(user, [' smith'])
+ 
+// class Profile {
+//     constructor(height, width){
+//         this.height = height;
+//         this.width = width;
+//     }
+//     objectName() {
+//         return this.height * this.width;
+//     }
+// }
 
+// class ProfileTwo extends Profile {
+//     constructor(height, width, text, bgColor){
+//         super(height, width);
+//         this.text = text;
+//         this.bgColor = bgColor;
+//     }
+//     showMyProps() {
+//         console.log(`Текст ${this.text}, цвет ${this.bgColor}`)
+//     }
+// }
+// const div = new ProfileTwo(25, 10, 'Hello World', 'red');
+// div.showMyProps()
+// console.log(div.objectName())
+// // const scuere = new Profile(10, 30);
+// // console.log(scuere.objectName())
